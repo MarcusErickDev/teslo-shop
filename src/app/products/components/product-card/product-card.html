@@ -1,14 +1,14 @@
 <div class="card card-compact bg-base-100 shadow-sm fade-in">
   <figure>
     <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes" />
+      [src]= "product().images | productImage"
+      alt="product().title" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+    <h2 class="card-title">{{product().title}}</h2>
+    <p>{{product().description | slice : 0 : 70}}...</p>
     <div class="card-actions justify-end">
-      <a [routerLink]="['/product','t-shirt']" class="btn btn-primary">Buy Now</a>
+      <a [routerLink]="['/product',product().slug]" class="btn btn-primary">Buy Now</a>
     </div>
   </div>
 </div>

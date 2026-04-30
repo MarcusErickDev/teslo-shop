@@ -33,4 +33,17 @@ export class ProductsService {
     ));
   }
 
+  getProductImage(imgId: string) {
+  return this.http.get(`${baseUrl}/files/product/${imgId}`, {
+    responseType: 'blob'
+  });
+}
+
+  // getProductImage(imgId: any): Observable<any> {
+  //   // console.log('ID',imgId);
+
+  //   return this.http.get<any>(`${baseUrl}/files/product/${imgId}`)
+  //     .pipe( tap( (img) => console.log(img)) )
+  // }
+
 }
