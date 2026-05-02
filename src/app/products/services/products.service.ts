@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductsResponse } from '@products/interfaces/product.interface';
+import { Product, ProductsResponse } from '@products/interfaces/product.interface';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -34,16 +34,16 @@ export class ProductsService {
   }
 
   getProductImage(imgId: string) {
-  return this.http.get(`${baseUrl}/files/product/${imgId}`, {
-    responseType: 'blob'
-  });
-}
+    return this.http.get(`${baseUrl}/files/product/${imgId}`, {
+      responseType: 'blob'
+    });
+  }
 
-  // getProductImage(imgId: any): Observable<any> {
-  //   // console.log('ID',imgId);
+  getProductByIdSlug( slug: string): Observable<Product> {
+    return this.http.get<Product>(`${baseUrl}/products/${slug}`)
+      .pipe( tap( prod => console.log(prod) ) );
+  }
 
-  //   return this.http.get<any>(`${baseUrl}/files/product/${imgId}`)
-  //     .pipe( tap( (img) => console.log(img)) )
-  // }
+
 
 }
