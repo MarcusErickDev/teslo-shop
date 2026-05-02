@@ -14,7 +14,7 @@ export class ProductImagePipe implements PipeTransform {
     console.log(value.length > 1);
     console.log(value == typeof(String))
 
-    if (value == typeof(String)) {
+    if (typeof value === 'string') {
       return `${baseUrl}/files/product/${value}`;
     }
 
