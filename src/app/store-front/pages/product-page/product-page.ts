@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '@products/services/products.service';
@@ -8,7 +8,7 @@ import { ProductsService } from '@products/services/products.service';
   imports: [],
   templateUrl: './product-page.html',
 })
-export class ProductPage implements OnInit{
+export class ProductPage {
 
   route = inject(ActivatedRoute);
   productsService = inject(ProductsService);
@@ -18,25 +18,10 @@ export class ProductPage implements OnInit{
     return this.params;
   })
 
-  constructor(){
-    effect( () => {
-      console.log(this.productResource.value());
-    })
-  }
-
-  ngOnInit(): void {
-
-    // this.route.params
-    // .subscribe( ({idSlug}) => {
-    //   this.params = idSlug;
-    // })
-
-  }
-
   productResource = rxResource({
     request: () => ({ idSlug: this.productSlug }),
     loader: ({request}) => {
-      return this.productsService.getProductByIdSlug(this.productSlug())
+      return this.productsService.getProductByIdSlug(request.idSlug())
     }
   })
 }
